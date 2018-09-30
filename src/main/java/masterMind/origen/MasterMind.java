@@ -1,4 +1,4 @@
-package masterMind.v100;
+package masterMind.origen;
 
 import java.io.Console;
 import java.lang.StringBuffer;
