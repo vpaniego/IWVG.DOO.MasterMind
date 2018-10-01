@@ -1,5 +1,7 @@
 package masterMind.solucion.models;
 
+import java.util.HashSet;
+
 public class Game {
 
     private State state;
@@ -10,6 +12,8 @@ public class Game {
 
     private static final int NUM_PLAYERS = 2;
     private static final int NUM_GUESSES = 10;
+
+    private int codeLength = 4;
 
     public Game() {
         state = State.INITIAL;
@@ -33,18 +37,21 @@ public class Game {
         return NUM_GUESSES;
     }
 
-    public int getCurrentGuess() {
-        return this.currentGuess;
-    }
+    public int getCurrentGuess() { return this.currentGuess; }
 
     public void setCurrentGuess(int currentGuess) {
         this.currentGuess = currentGuess;
     }
 
+    public int getCodeLength(){ return this.codeLength; }
 
     public void clear() {
         this.currentGuess = 0;
         board.clear();
+    }
+
+    public HashSet<Code> getSecretCode(){
+        return board.getSecretCode();
     }
 
     public boolean existMasterMind() {

@@ -15,9 +15,9 @@ public class Logic {
 
     public Logic() {
         game = new Game();
-        startController = new LocalStartController(game, codeController);
-        codeController = new LocalCodeController(game,continueController);
         continueController = new LocalContinueController(game);
+        codeController = new LocalCodeController(game,continueController);
+        startController = new LocalStartController(game, codeController);
     }
 
     public LocalOperationController getController() {

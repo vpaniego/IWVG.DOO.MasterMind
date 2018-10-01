@@ -2,7 +2,10 @@ package masterMind.solucion.controllers.local;
 
 import masterMind.solucion.models.Color;
 import masterMind.solucion.models.Game;
+import masterMind.solucion.models.Code;
 import masterMind.solucion.models.State;
+
+import java.util.HashSet;
 
 public abstract class LocalController {
 
@@ -21,10 +24,31 @@ public abstract class LocalController {
         return game.getState();
     }
 
+    protected int getCurrentGuess() {
+        return game.getCurrentGuess();
+    }
+
+    protected void setCurrentGuess(int current) {
+        game.setCurrentGuess(current);
+    }
+
+    protected int getNumberOfGuess() {
+        return game.getNumGuesses();
+    }
+
+    protected int getCodeLength() {
+        return game.getCodeLength();
+    }
+
+    protected HashSet<Code> getSecretCode() {
+        return game.getSecretCode();
+    }
+
     public void setState(State state) {
         assert state != null;
         game.setState(state);
     }
+
 
     public void clear() {
         game.clear();

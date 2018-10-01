@@ -18,6 +18,10 @@ public class Board {
         secretCode = new Code().getSecretCode();
     }
 
+    public HashSet<Code> getSecretCode(){
+        return this.secretCode;
+    }
+
      boolean existMasterMind() {
 		/*assert color != Color.NONE;
 		Set<Coordinate> coordinateSet = coordinates.get(color);

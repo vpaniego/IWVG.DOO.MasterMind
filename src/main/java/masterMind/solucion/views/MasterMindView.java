@@ -10,6 +10,7 @@ import masterMind.solucion.utils.LimitedIntDialog;
 import masterMind.solucion.utils.IO;
 import masterMind.solucion.utils.YesNoDialog;
 import masterMind.solucion.utils.StartDialog;
+import masterMind.solucion.utils.CodeDialog;
 
 public class MasterMindView implements OperationControllerVisitor {
 
@@ -24,7 +25,6 @@ public class MasterMindView implements OperationControllerVisitor {
         int users = new LimitedIntDialog("En qué modo deseas jugar? :\n" + "1. Partida\n" + "2. Demo\n", 1, 2).read();
         startDilalog.write("Entendido! Juguemos...\n");
         startController.start(users);
-
         new BoardView(startController).write();
     }
 
@@ -36,7 +36,8 @@ public class MasterMindView implements OperationControllerVisitor {
 
     @Override
     public void visit(CodeController codeController) {
-        codeController.score();
+        codeController.score("");
+        new BoardView(codeController).write();
     }
 
 }

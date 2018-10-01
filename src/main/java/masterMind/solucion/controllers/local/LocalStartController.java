@@ -21,7 +21,7 @@ public class LocalStartController extends LocalOperationController implements
     public void start(int users) {
         assert new ClosedInterval(0, this.numPlayers()).includes(users);
         assert this.getState() == State.INITIAL;
-        codeController.score();
+        codeController.score("");
         this.setState(State.IN_GAME);
     }
 
