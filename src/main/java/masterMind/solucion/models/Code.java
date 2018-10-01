@@ -1,49 +1,65 @@
 package masterMind.solucion.models;
 
-
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Code {
 
-    int codeLength;
-
-    Color color;
+    String color;
     HashSet<Integer> index;
 
-    public Code(int codeLength, ){
-        this.codeLength = codeLength;
-        this.generate();
+    private boolean duplicatesAllowed = false;
+    private String colores = "ARVZ";
+    private int codeLength = 4;
+
+    public Code() {
     }
 
-    public void generate() {
-        code = new HashMap<>();
-
-        for (int i = 0; i < this.codeLength; i++) {
-            String color = randomColor();
-            if (!duplicatesAllowed) {
-                while (code.containsKey(color)) {
-                    color = obtenerColorClaveAleatorio();
-                }
-            }
-            HashSet<Integer> indices = code.getOrDefault(color, new HashSet<Integer>());
-            indices.add(i);
-            code.put(color, indices);
-        }
+    public Code(String color, HashSet<Integer> index) {
+        this.color = color;
+        this.index = index;
     }
 
-    private String randomColor() {
-        String colores = "ARVZ";
-        char c = colores.charAt(ThreadLocalRandom.current().nextInt(colores.length()));
-        String color = String.valueOf(c);
-        return color;
-    }
-
-    public Color getColor() {
+    public String getColor() {
         return this.color;
+    }
+
+    public int getCodeLength() {
+        return this.codeLength;
     }
 
     public HashSet<Integer> getIndex() {
         return this.index;
     }
+
+    public HashSet<Code> getSecretCode() {
+        HashSet<Code> secretCode = new HashSet<Code>();
+
+        HashMap<String, HashSet<Integer>> auxiliar = new HashMap<String, HashSet<Integer>>();
+        for (int i = 0; i < this.codeLength; i++) {
+            String color = getRandomColor();
+            if (!duplicatesAllowed) {
+                while (auxiliar.containsKey(color)) {
+                    color = getRandomColor();
+                }
+            }
+            HashSet<Integer> indices = auxiliar.getOrDefault(color, new HashSet<Integer>());
+            indices.add(i);
+            auxiliar.put(color, indices);
+            Code code = new Code(color, indices);
+            secretCode.add(code);
+        }
+
+        return secretCode;
+    }
+
+    private String getRandomColor() {
+        char c = colores.charAt(ThreadLocalRandom.current().nextInt(colores.length()));
+        String color = String.valueOf(c);
+        return color;
+    }
+
 }

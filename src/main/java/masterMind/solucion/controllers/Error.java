@@ -1,4 +1,4 @@
-package masterMind.solucion.models;
+package masterMind.solucion.controllers;
 
 public enum Error {
     INTERVAL_COLOR("El intento debe ser un color entre [A-amarillo, R-rojo, V-verde, Z-azul]!"),

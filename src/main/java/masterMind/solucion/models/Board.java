@@ -4,44 +4,22 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
-class Board {
+import masterMind.solucion.models.Code;
 
-	/*private Map<Color, Set<Coordinate>> coordinates;*/
+public class Board {
 
-	private boolean duplicatesAllowed;
-	private int numberOfGuesses;
+    private HashSet<Code> secretCode;
 
+    Board(int numPlayers, int numberOfGuesses) {
+        assert numPlayers > 0;
+        assert numberOfGuesses > 0;
+        secretCode = new Code().getSecretCode();
+    }
 
-	Board(int numPlayers) {
-		assert numPlayers > 0;
-		coordinates = new HashMap<>();
-		for (int i = 0; i < numPlayers; i++) {
-			coordinates.put(Color.values()[i], new HashSet<>());
-		}
-	}
-
-	Color getColor(Coordinate coordinate) {
-		assert coordinate != null;
-		for (Color color : coordinates.keySet()) {
-			if (coordinates.get(color).contains(coordinate)) {
-				return color;
-			}
-		}
-		return Color.NONE;
-	}
-
-	boolean complete() {
-		int contTokens = 0;
-		for (Color color : coordinates.keySet()) {
-			contTokens += coordinates.get(color).size();
-		}
-		return contTokens == Coordinate.DIMENSION
-				* coordinates.keySet().size();
-	}
-
-	boolean existTicTacToe(Color color) {
-		assert color != Color.NONE;
+     boolean existMasterMind() {
+		/*assert color != Color.NONE;
 		Set<Coordinate> coordinateSet = coordinates.get(color);
 		if (coordinateSet.size() != Coordinate.DIMENSION) {
 			return false;
@@ -56,39 +34,13 @@ class Board {
 			if (coordinateArray[i].direction(coordinateArray[i + 1]) != direction) {
 				return false;
 			}
-		}
-		return true;
-	}
+		}*/
+        return true;
+    }
 
-	/*boolean empty(Coordinate coordinate) {
-		assert coordinate != null;
-		return !this.full(coordinate, Color.XS)
-				&& !this.full(coordinate, Color.OS);
-	}
-
-	void put(Coordinate coordinate, Color color) {
-		assert coordinate != null;
-		assert color != Color.NONE;
-		assert color != null;
-		coordinates.get(color).add(coordinate.clone());
-	}
-
-	void remove(Coordinate coordinate, Color color) {
-		assert coordinate != null;
-		assert color != Color.NONE;
-		coordinates.get(color).remove(coordinate);
-	}
-
-	boolean full(Coordinate coordinate, Color color) {
-		assert coordinate != null;
-		assert color != Color.NONE;
-		return coordinates.get(color).contains(coordinate);
-	}*/
-
-	void clear() {
-		for (Color color : coordinates.keySet()) {
-			coordinates.get(color).clear();
-		}		
-	}
+    void clear() {
+        assert secretCode != null;
+        this.secretCode.clear();
+    }
 
 }

@@ -7,30 +7,28 @@ import masterMind.solucion.models.State;
 import masterMind.solucion.utils.ClosedInterval;
 
 public class LocalStartController extends LocalOperationController implements
-		StartController {
+        StartController {
 
-	private LocalColocateControllerBuilder colocateControllerBuilder;
+    private LocalCodeController codeController;
 
-	LocalStartController(Game game,
-			LocalColocateControllerBuilder colocateControllerBuilder) {
-		super(game);
-		assert colocateControllerBuilder != null;
-		this.colocateControllerBuilder = colocateControllerBuilder;
-	}
+    LocalStartController(Game game,
+                         LocalCodeController codeController) {
+        super(game);
+        assert codeController != null;
+        this.codeController = codeController;
+    }
 
-	public void start(int users) {
-		assert new ClosedInterval(0, this.numPlayers()).includes(users);
-		assert this.getState() == State.INITIAL;
-		colocateControllerBuilder.build(users);
-		this.setState(State.IN_GAME);
-	}
-
-
+    public void start(int users) {
+        assert new ClosedInterval(0, this.numPlayers()).includes(users);
+        assert this.getState() == State.INITIAL;
+        codeController.score();
+        this.setState(State.IN_GAME);
+    }
 
 
-	@Override
-	public void accept(OperationControllerVisitor operationControllerVisitor) {
-		operationControllerVisitor.visit(this);
-	}
+    @Override
+    public void accept(OperationControllerVisitor operationControllerVisitor) {
+        operationControllerVisitor.visit(this);
+    }
 
 }

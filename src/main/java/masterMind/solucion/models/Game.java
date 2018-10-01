@@ -2,42 +2,55 @@ package masterMind.solucion.models;
 
 public class Game {
 
-	private State state;
-	
-	private Code code;
+    private State state;
 
-	private Board board;
-	
-	private static final int NUM_PLAYERS = 2;
-	
-	public Game() {
-		state = State.INITIAL;
-		code = new Code();
-		board = new Board(Game.NUM_PLAYERS);
-	}
-	
-	public State getState() {
-		return state;
-	}
-	
-	public void setState(State state){
-		this.state = state;
-	}
+    private Board board;
 
-	public int getNumPlayers() {
-		return NUM_PLAYERS;
-	}
+    private int currentGuess;
 
-	public void clear() {
-		board.clear();
-	}
+    private static final int NUM_PLAYERS = 2;
+    private static final int NUM_GUESSES = 10;
 
-	public boolean duplicateAllowed(){
-		board.
-	}
+    public Game() {
+        state = State.INITIAL;
+        this.currentGuess = 0;
+        board = new Board(Game.NUM_PLAYERS, Game.NUM_GUESSES);
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public int getNumPlayers() {
+        return NUM_PLAYERS;
+    }
+
+    public int getNumGuesses() {
+        return NUM_GUESSES;
+    }
+
+    public int getCurrentGuess() {
+        return this.currentGuess;
+    }
+
+    public void setCurrentGuess(int currentGuess) {
+        this.currentGuess = currentGuess;
+    }
 
 
-	
+    public void clear() {
+        this.currentGuess = 0;
+        board.clear();
+    }
+
+    public boolean existMasterMind() {
+        return board.existMasterMind();
+    }
+
 	/*public Color take() {
 		return turn.take();
 	}
@@ -79,5 +92,5 @@ public class Game {
 	public Color getColor(Coordinate coordinate) {
 		return board.getColor(coordinate);
 	}*/
-	
+
 }

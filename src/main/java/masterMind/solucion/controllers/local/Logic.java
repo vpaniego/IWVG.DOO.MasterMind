@@ -2,11 +2,12 @@ package masterMind.solucion.controllers.local;
 
 import masterMind.solucion.models.Game;
 
+
 public class Logic {
 
     private Game game;
 
-    private LocalColocateControllerBuilder colocateControllerBuilder;
+    private LocalCodeController codeController;
 
     private LocalStartController startController;
 
@@ -14,8 +15,8 @@ public class Logic {
 
     public Logic() {
         game = new Game();
-        colocateControllerBuilder = new LocalColocateControllerBuilder(game);
-        startController = new LocalStartController(game, colocateControllerBuilder);
+        startController = new LocalStartController(game, codeController);
+        codeController = new LocalCodeController(game,continueController);
         continueController = new LocalContinueController(game);
     }
 
@@ -24,7 +25,7 @@ public class Logic {
             case INITIAL:
                 return startController;
             case IN_GAME:
-                return colocateControllerBuilder.getColocateController();
+                return codeController;
             case FINAL:
                 return continueController;
             case EXIT:

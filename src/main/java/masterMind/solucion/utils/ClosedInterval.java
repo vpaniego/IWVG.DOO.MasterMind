@@ -1,4 +1,4 @@
-package masterMind.solutions.utils;
+package masterMind.solucion.utils;
 
 public class ClosedInterval {
 

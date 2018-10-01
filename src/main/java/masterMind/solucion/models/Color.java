@@ -8,4 +8,5 @@ public enum Color {
     B,
     N,
     NO_EXIST;
+
 }
